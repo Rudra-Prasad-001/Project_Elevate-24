@@ -1,0 +1,17 @@
+{
+  "name": "elevate",
+  "version": "1.0.0",
+  "description": "Landing page of Elevate Project",
+  "main": "index.js",
+  "scripts": {
+    "compile:sass": "sass sass/main.scss css/style.css -w"
+  },
+  "author": "Praveen Pandey",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.82.0"
+  },
+  "dependencies": {
+    "sass-migrator": "^2.2.1"
+  }
+}

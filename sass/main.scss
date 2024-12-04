@@ -1,0 +1,181 @@
+@use "sass:color";
+
+// Define primary variables
+$primary-color: #4CAF50; // Green accent
+$secondary-color: #f5f5f5; // Light grey
+$text-color: #333; // Dark text
+$white-color: #ffffff; // White color
+$border-color: #ccc; // Light border color
+$font-stack: 'Arial', sans-serif;
+
+// Mixin for flex layouts
+@mixin flex-center($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// Base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px; // Base font size
+}
+
+body {
+  font-family: $font-stack;
+  line-height: 1.6;
+  color: $text-color;
+  background-color: $secondary-color;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+// Header
+.header {
+  @include flex-center(row, space-between, center);
+  padding: 1rem 2rem;
+  background-color: $primary-color;
+  color: $white-color;
+
+  &__logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  &__nav {
+    &-list {
+      @include flex-center(row, space-between);
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    &-link {
+      text-decoration: none;
+      color: $white-color;
+      font-size: 1rem;
+      transition: color 0.3s;
+
+      &:hover {
+        color: color.adjust($primary-color, $lightness: -15%, $space: hsl);
+      }
+    }
+  }
+}
+
+// Main content
+.main {
+  flex-grow: 1;
+  @include flex-center(column, center, center);
+  padding: 2rem;
+}
+
+.chat {
+  background: $white-color;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+
+  &__messages {
+    padding: 1rem;
+    overflow-y: auto;
+    height: 300px;
+    border-bottom: 1px solid $border-color;
+  }
+
+  &__message {
+    margin-bottom: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 20px;
+    max-width: 70%;
+    font-size: 1rem;
+
+    &--user {
+      background-color: $primary-color;
+      color: $white-color;
+      align-self: flex-end;
+    }
+
+    &--bot {
+      background-color: $secondary-color;
+      align-self: flex-start;
+    }
+  }
+
+  &__form {
+    @include flex-center(row, space-between, center);
+    padding: 1rem;
+    gap: 1rem;
+    border-top: 1px solid $border-color;
+  }
+
+  &__input {
+    flex-grow: 1;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+  }
+
+  &__button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    background-color: $primary-color;
+    color: $white-color;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: color.adjust($primary-color, $lightness: -10%, $space: hsl);
+    }
+  }
+}
+
+// Footer
+.footer {
+  background-color: $primary-color;
+  color: $white-color;
+  text-align: center;
+  padding: 1rem;
+
+  &__text {
+    font-size: 0.9rem;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .header__nav-list {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .chat__messages {
+    height: 200px; // Adjust height for smaller screens
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .chat__form {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .chat__button {
+    width: 100%;
+  }
+}
